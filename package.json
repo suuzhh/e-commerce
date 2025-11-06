@@ -1,0 +1,18 @@
+{
+  "name": "@o2h/e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "oxlint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "oxlint": "^1.26.0",
+    "tsdown": "^0.16.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.7"
+  }
+}
