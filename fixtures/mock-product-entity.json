@@ -1,0 +1,81 @@
+{
+  "id": "1",
+  "title": "Mock title",
+  "price": null,
+  "regular_price": null,
+  "image": "https:test.png",
+  "buyable": true,
+  "variants": [
+    {
+      "id": "20001169",
+      "title": "Mock SKU - 1 PC（Max）",
+      "price": "39.99",
+      "regular_price": "85.98",
+      "image": "https://test.png",
+      "buyable": true,
+      "media": {
+        "id": "20000789",
+        "url": "https://test.png",
+        "thumbnail": "https://test.png",
+        "type": "image"
+      },
+      "attrs": [
+        {
+          "name": "Bundle Of Choice",
+          "value": "1 PC（Max）"
+        }
+      ]
+    },
+    {
+      "id": "20001170",
+      "title": "Mock SKU - 2 PCS（Max）",
+      "price": "79.99",
+      "regular_price": "171.99",
+      "image": "https://test.png",
+      "buyable": true,
+      "media": {
+        "id": "20000786",
+        "url": "https://test.png",
+        "thumbnail": "https://test.png",
+        "type": "image"
+      },
+      "attrs": [
+        {
+          "name": "Bundle Of Choice",
+          "value": "2 PCS（Max）"
+        }
+      ]
+    },
+    {
+      "id": "20001171",
+      "title": "Mock SKU - 4 PCS（Max）",
+      "price": "119.99",
+      "regular_price": "324.99",
+      "image": "https://test.png",
+      "buyable": true,
+      "media": {
+        "id": "20000787",
+        "url": "https://test.png",
+        "thumbnail": "https://test.png",
+        "type": "image"
+      },
+      "attrs": [
+        {
+          "name": "Bundle Of Choice",
+          "value": "4 PCS（Max）"
+        }
+      ]
+    }
+  ],
+  "gallery": [],
+  "variant_attrs": [
+    {
+      "value": [
+        "1 PC（Max）",
+        "2 PCS（Max）",
+        "4 PCS（Max）"
+      ],
+      "name": "Bundle Of Choice"
+    }
+  ]
+}
