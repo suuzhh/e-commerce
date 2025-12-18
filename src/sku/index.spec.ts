@@ -8,11 +8,12 @@ describe('createSKUStateCache', () => {
       { id: 2, attrs: [{ name: 'size', value: 'medium' }], isBuyable: true },
       { id: 3, attrs: [{ name: 'size', value: 'small' }], isBuyable: false },
     ];
-    const cache = createSKUStateCache(skus, {
-      getSKUID: sku => sku.id,
+    type SKU = typeof skus[number];
+    const cache = createSKUStateCache<SKU>(skus, {
+      getSKUID: sku => sku.id.toString(),
       onCheckBuyable: sku => sku.isBuyable,
       getSKUAttrs: sku => sku.attrs,
     });
-    expect(cache.getSoldOutState([{ name: 'size', value: 'small' }])).toEqual(new Set([skus[0].id, skus[2].id]));
+    expect(cache.isBuyable([{ name: 'size', value: 'small' }])).to.be.true;
   });
 });

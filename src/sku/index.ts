@@ -4,22 +4,15 @@ interface SKUAttr {
   value: string;
 }
 
-/** 检测指定SKU是否可购买 */
-type OnCheckBuyable = <T>(sku: T) => boolean;
-
-type GetSKUAttrs = <T>(sku: T) => SKUAttr[];
-
-/** 返回的id统一转为字符串 */
-type GetSKUID = <T>(sku: T) => string;
-
-interface Config {
-  onCheckBuyable: OnCheckBuyable;
-  getSKUAttrs: GetSKUAttrs;
-  getSKUID: GetSKUID;
+interface Config<T> {
+  onCheckBuyable: (sku: T) => boolean;
+  getSKUAttrs: (sku: T) => SKUAttr[];
+  getSKUID: (sku: T) => string;
+  
 }
 
 // 商品SKU库存/上下架状态快速生成
-export function createSKUStateCache<SKU = any>(list: SKU[], { getSKUID, onCheckBuyable, getSKUAttrs }: Config) {
+export function createSKUStateCache<SKU = object>(list: SKU[], { getSKUID, onCheckBuyable, getSKUAttrs }: Config<SKU>) {
   // 生成所有的SKU组合对应的售空映射
   // 格式化售空SKU的属性名和属性值
   const buyableAttrs = list.reduce((acc, variant) => {
@@ -59,27 +52,11 @@ export function createSKUStateCache<SKU = any>(list: SKU[], { getSKUID, onCheckB
     // 属性名+属性值序列 => 可购买的属性组合序列
   }, new Map<string, Set<string>>());
   return {
-    /** 通过完整属性组合判断是否可购买 */
-    getSoldOutState: (attrs: SKUAttr[]) => {
-      const formattedAttrs = createUniqueAttrsKey(attrs);
-      const matchedSku = list.find(sku => {
-        const skuAttrs = getSKUAttrs(sku) ?? [];
-        if (skuAttrs.length === 0) {
-          return false;
-        }
-        // 完全匹配attrs和当前sku的属性
-        return attrs.every(attr => {
-          const skuAttr = skuAttrs.find(skuAttr => skuAttr.name === attr.name);
-          if (!skuAttr) {
-            return false;
-          }
-          return skuAttr.value === attr.value;
-        })
+    /** 是否可购买 */
+    isBuyable: (attrs: SKUAttr[]): boolean => {
+      return buyableAttrs.has(createUniqueAttrsKey(attrs));
+    },
 
-        // const formattedSkuAttrs = createUniqueAttrsKey(skuAttrs);
-        // return formattedSkuAttrs === formattedAttrs;
-      })
-    }
   }
 }
 
